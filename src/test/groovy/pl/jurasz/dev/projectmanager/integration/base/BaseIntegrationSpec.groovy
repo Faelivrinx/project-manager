@@ -52,5 +52,12 @@ abstract class BaseIntegrationSpec extends Specification {
         return sendRequest(uri, HttpMethod.POST, requestBody, Object)
     }
 
+    protected <T> ResponseEntity<T> get(String uri, Class<T> responseBodyType) {
+        return sendRequest(uri, HttpMethod.GET, null, responseBodyType)
+    }
+    protected <T> ResponseEntity<T> get(String uri, ParameterizedTypeReference<T> responseBodyType) {
+        return sendRequest(uri, HttpMethod.GET, null, responseBodyType)
+    }
+
 
 }
