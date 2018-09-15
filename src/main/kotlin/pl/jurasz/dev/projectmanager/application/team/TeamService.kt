@@ -1,12 +1,13 @@
 package pl.jurasz.dev.projectmanager.application.team
 
-import org.springframework.http.HttpStatus
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.ResponseStatus
 import pl.jurasz.dev.projectmanager.application.team.dto.ExistingTeamDto
 import pl.jurasz.dev.projectmanager.application.team.dto.NewTeamDto
+import pl.jurasz.dev.projectmanager.domain.expection.ExceptionThrower
 import pl.jurasz.dev.projectmanager.domain.team.Team
 import pl.jurasz.dev.projectmanager.domain.team.TeamRepository
+import java.lang.invoke.MethodHandles
 
 @Service
 class TeamService(
@@ -14,13 +15,19 @@ class TeamService(
 ) {
 
     fun createTeam(newTeam: NewTeamDto) {
-        val team = Team(newTeam.name)
-
-        if (teamRepository.exist(team.name)){
-            throw TeamAlreadyExistException("Team already exists")
+        logger.info("Creating new team {} ", newTeam.name)
+        if (teamRepository.existByName(newTeam.name)){
         }
-        teamRepository.save(team)
-
+        when(teamRepository.existByName(newTeam.name)){
+            true -> {
+                logger.warn("Team {} already exists.", newTeam.name)
+                throw ExceptionThrower()
+            }
+            false -> {
+                val team = Team(newTeam.name)
+                teamRepository.save(team)
+            }
+        }
     }
 
     fun getTeams(): List<ExistingTeamDto> {
@@ -28,7 +35,9 @@ class TeamService(
         return ExistingTeamDto.mapToExistingTeams(teams)
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Team already exists")
-    internal class TeamAlreadyExistException(msg: String) : RuntimeException(msg)
+    companion object {
+        private val logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass())
+    }
+
 
 }

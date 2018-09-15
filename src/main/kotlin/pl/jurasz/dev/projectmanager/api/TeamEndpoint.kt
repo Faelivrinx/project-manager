@@ -18,9 +18,17 @@ internal class TeamEndpoint(
         teamService.createTeam(team)
     }
 
+    @PostMapping(value = "/{teamName}/members")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun createTeamMember(@PathVariable teamName: String){
+        
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     fun getTeams() : List<ExistingTeamDto>{
         return teamService.getTeams()
     }
+
+
 }

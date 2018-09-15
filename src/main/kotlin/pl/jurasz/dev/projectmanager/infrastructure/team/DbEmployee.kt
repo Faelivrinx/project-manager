@@ -17,7 +17,7 @@ data class DbEmployee (
         fun toEmployee(dbEmployee: DbEmployee) : Employee = Employee(
                 dbEmployee.firstName,
                 dbEmployee.lastName,
-                JobPosition.DEVELOPER)
+                JobPosition.valueOf(dbEmployee.jobPosition))
     }
 
 }
