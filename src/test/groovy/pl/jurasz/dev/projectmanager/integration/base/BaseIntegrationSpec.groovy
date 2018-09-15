@@ -16,7 +16,6 @@ import spock.lang.Specification
 @SpringBootTest(classes = [Application], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 abstract class BaseIntegrationSpec extends Specification {
 
-    @Autowired TestRestTemplate restTemplate
     @Autowired MongoTemplate mongo
     @Rule WireMockRule wireMockRule = new WireMockRule(12345)
 
@@ -38,26 +37,5 @@ abstract class BaseIntegrationSpec extends Specification {
             mongo.dropCollection(collection)
         }
     }
-
-    private <T> ResponseEntity<T> sendRequest(String uri, HttpMethod method, Object requestBody, Class<T> responseBodyType) {
-        def entity = new HttpEntity<>(requestBody)
-        return restTemplate.exchange(uri, method, entity, responseBodyType)
-    }
-    private <T> ResponseEntity<T> sendRequest(String uri, HttpMethod method, Object requestBody, ParameterizedTypeReference<T> responseBodyType) {
-        def entity = new HttpEntity<>(requestBody)
-        return restTemplate.exchange(uri, method, entity, responseBodyType)
-    }
-
-    protected ResponseEntity post(String uri, Object requestBody) {
-        return sendRequest(uri, HttpMethod.POST, requestBody, Object)
-    }
-
-    protected <T> ResponseEntity<T> get(String uri, Class<T> responseBodyType) {
-        return sendRequest(uri, HttpMethod.GET, null, responseBodyType)
-    }
-    protected <T> ResponseEntity<T> get(String uri, ParameterizedTypeReference<T> responseBodyType) {
-        return sendRequest(uri, HttpMethod.GET, null, responseBodyType)
-    }
-
 
 }
