@@ -1,4 +1,4 @@
-package pl.jurasz.dev.projectmanager.application
+package pl.jurasz.dev.projectmanager.application.team
 
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service

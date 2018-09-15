@@ -3,7 +3,7 @@ package pl.jurasz.dev.projectmanager.api
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import pl.jurasz.dev.projectmanager.application.team.dto.NewTeamDto
-import pl.jurasz.dev.projectmanager.application.TeamService
+import pl.jurasz.dev.projectmanager.application.team.TeamService
 import pl.jurasz.dev.projectmanager.application.team.dto.ExistingTeamDto
 
 @RestController
