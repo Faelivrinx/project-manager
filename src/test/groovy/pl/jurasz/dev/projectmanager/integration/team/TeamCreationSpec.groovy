@@ -2,6 +2,7 @@ package pl.jurasz.dev.projectmanager.integration.team
 
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpStatus
+import pl.jurasz.dev.projectmanager.application.team.dto.ExistingTeamDto
 import pl.jurasz.dev.projectmanager.application.team.dto.NewTeamDto
 import pl.jurasz.dev.projectmanager.integration.base.BaseIntegrationSpec
 
@@ -12,13 +13,13 @@ class TeamCreationSpec extends BaseIntegrationSpec{
         def teamName = "Team 1"
 
         when:
-        def response = post("/team", new NewTeamDto(teamName))
+        def response = post("/teams", new NewTeamDto(teamName))
 
         then:
         response.statusCode == HttpStatus.CREATED
 
         when:
-        response = get("/teams", new ParameterizedTypeReference<List<ExistingTeam>>(){})
+        response = get("/teams", new ParameterizedTypeReference<List<ExistingTeamDto>>(){})
 
         then:
         response.statusCode == HttpStatus.OK

@@ -3,9 +3,10 @@ package pl.jurasz.dev.projectmanager.application
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.ResponseStatus
+import pl.jurasz.dev.projectmanager.application.team.dto.ExistingTeamDto
 import pl.jurasz.dev.projectmanager.application.team.dto.NewTeamDto
-import pl.jurasz.dev.projectmanager.domain.Team
-import pl.jurasz.dev.projectmanager.domain.TeamRepository
+import pl.jurasz.dev.projectmanager.domain.team.Team
+import pl.jurasz.dev.projectmanager.domain.team.TeamRepository
 
 @Service
 class TeamService(
@@ -20,6 +21,11 @@ class TeamService(
         }
         teamRepository.save(team)
 
+    }
+
+    fun getTeams(): List<ExistingTeamDto> {
+        val teams = teamRepository.findAll()
+        return ExistingTeamDto.mapToExistingTeams(teams)
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Team already exists")
