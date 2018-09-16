@@ -4,8 +4,10 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "Team already exists")
-internal class ExceptionThrower : RuntimeException()
+internal class TeamAlreadyExist : RuntimeException()
 
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "Team doesn't exists")
-internal class NonExistenceTeamExcepiton : RuntimeException()
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+internal class EntityAlreadyExistException(msg: ErrorCode) : RuntimeException(msg.toString())
 
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+internal class InvalidEntityException(msg: ErrorCode) : RuntimeException(msg.toString())
