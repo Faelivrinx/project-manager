@@ -6,4 +6,5 @@ interface TeamRepository {
     fun existByName(id: String) : Boolean
     fun save(team: Team)
     fun findAll() : List<Team>
+    fun findByName(teamName: String): Team?
 }

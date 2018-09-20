@@ -14,10 +14,11 @@ data class DbEmployee (
                 employee.lastName,
                 employee.jobPosition.toString())
 
-        fun toEmployee(dbEmployee: DbEmployee) : Employee = Employee(
+        fun fromDbEmployee(dbEmployee: DbEmployee) : Employee = Employee(
                 dbEmployee.firstName,
                 dbEmployee.lastName,
                 JobPosition.valueOf(dbEmployee.jobPosition))
+
     }
 
 }

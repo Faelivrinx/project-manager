@@ -9,3 +9,6 @@ internal class EntityAlreadyExistException(msg: ErrorCode) : RuntimeException(ms
 
 @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
 internal class InvalidEntityException(msg: ErrorCode) : RuntimeException(msg.toString())
+
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+internal class MissingEntityException(msg: ErrorCode) : RuntimeException(msg.toString())

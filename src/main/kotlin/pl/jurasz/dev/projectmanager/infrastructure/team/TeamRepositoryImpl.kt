@@ -13,6 +13,11 @@ class TeamRepositoryImpl (
         val dbTeamRepository: DbTeamRepository
 ) : TeamRepository {
 
+    override fun findByName(teamName: String): Team? {
+       val dbTeam = dbTeamRepository.findByName(teamName)
+        return dbTeam?.let { DbTeam.toTeam(it) }
+    }
+
     override fun save(team: Team) {
         val dbTeam = DbTeam.fromTeam(team)
         dbTeamRepository.save(dbTeam)
@@ -35,4 +40,6 @@ class TeamRepositoryImpl (
 }
 
 @Repository
-interface DbTeamRepository: MongoRepository<DbTeam, String>
+interface DbTeamRepository: MongoRepository<DbTeam, String>{
+    fun findByName(name: String): DbTeam?
+}

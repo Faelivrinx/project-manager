@@ -12,7 +12,7 @@ data class ExistingTeam (
         fun mapToExistingTeam(team: Team) : ExistingTeam = ExistingTeam(
                 team.name,
                 team.currentlyImplementedProjects,
-                true, //TODO
+                team.isBusy(),
                 team.members.map { TeamMemberDto.mapToTeamMember(it) }
         )
     }
