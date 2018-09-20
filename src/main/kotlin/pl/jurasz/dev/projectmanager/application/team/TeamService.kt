@@ -6,7 +6,6 @@ import pl.jurasz.dev.projectmanager.application.team.dto.ExistingTeamDto
 import pl.jurasz.dev.projectmanager.application.team.dto.NewTeamDto
 import pl.jurasz.dev.projectmanager.domain.expection.EntityAlreadyExistException
 import pl.jurasz.dev.projectmanager.domain.expection.ErrorCode
-import pl.jurasz.dev.projectmanager.domain.expection.TeamAlreadyExist
 import pl.jurasz.dev.projectmanager.domain.team.Team
 import pl.jurasz.dev.projectmanager.domain.team.TeamRepository
 import java.lang.invoke.MethodHandles
@@ -18,13 +17,8 @@ class TeamService(
 
     fun createTeam(newTeam: NewTeamDto) {
         logger.info("Creating new team {} ", newTeam.name)
-        if (teamRepository.existByName(newTeam.name)){
-        }
         when(teamRepository.existByName(newTeam.name)){
-            true -> {
-                logger.warn("Team {} already exists.", newTeam.name)
-                throw EntityAlreadyExistException(ErrorCode.TEAM_ALREADY_EXISTS)
-            }
+            true -> throw EntityAlreadyExistException(ErrorCode.TEAM_ALREADY_EXISTS)
             false -> {
                 val team = Team(newTeam.name)
                 teamRepository.save(team)

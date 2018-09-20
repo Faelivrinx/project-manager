@@ -3,8 +3,6 @@ package pl.jurasz.dev.projectmanager.domain.expection
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
 
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "Team already exists")
-internal class TeamAlreadyExist : RuntimeException()
 
 @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
 internal class EntityAlreadyExistException(msg: ErrorCode) : RuntimeException(msg.toString())

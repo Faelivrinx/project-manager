@@ -16,4 +16,10 @@ data class Team ( val name: String,
             true ->  throw InvalidEntityException(ErrorCode.EMPTY_TEAM_NAME)
         }
     }
+
+    fun isBusy(): Boolean = currentlyImplementedProjects > THRESHOLD_BUSY_TEAM
+
+    companion object {
+        private const val THRESHOLD_BUSY_TEAM = 3
+    }
 }

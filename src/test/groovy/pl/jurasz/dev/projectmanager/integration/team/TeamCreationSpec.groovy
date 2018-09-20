@@ -12,34 +12,7 @@ import static pl.jurasz.dev.projectmanager.integration.team.base.SampleNewTeamDt
 
 class TeamCreationSpec extends BaseIntegrationSpec implements OperationOnTeamEndpoint{
 
-    def "Create new team and add member"(){
-        when: "new team is created"
-        def response = postNewTeam(sampleNewTeamDto())
-
-        then: "system create new team"
-        response.statusCode == HttpStatus.CREATED
-
-        when: "get all created teams"
-        response = getTeams()
-
-        then: "verify that one team was created"
-        response.statusCode == HttpStatus.OK
-        response.body.size() == 1
-
-        and: "has default values"
-        with(response.body[0]){
-            name == sampleNewTeamDto().name
-            currentlyImplementedProjects == 0
-            true
-            members == []
-        }
-
-        when: "add member to team"
-
-    }
-
     def "Should not create team with empty name"(){
-
         when:
         def response = postNewTeam(sampleNewTeamDto(name: name))
 
