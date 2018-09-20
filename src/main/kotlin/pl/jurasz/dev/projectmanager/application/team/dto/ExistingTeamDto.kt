@@ -15,7 +15,7 @@ data class ExistingTeamDto (
             ExistingTeamDto(
                     it.name,
                     it.currentlyImplementedProjects,
-                    false,
+                    it.isBusy(),
                     TeamMemberDto.mapToTeamMembers(it.members))
         }
     }

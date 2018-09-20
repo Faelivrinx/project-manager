@@ -8,30 +8,33 @@ import pl.jurasz.dev.projectmanager.integration.base.BaseIntegrationSpec
 import pl.jurasz.dev.projectmanager.integration.team.base.OperationOnTeamEndpoint
 import pl.jurasz.dev.projectmanager.integration.team.base.SampleNewTeamDto
 
+import static pl.jurasz.dev.projectmanager.integration.team.base.SampleNewTeamDto.sampleNewTeamDto
+
 class TeamCreationSpec extends BaseIntegrationSpec implements OperationOnTeamEndpoint{
 
-    def "Create new team"(){
-        when: "new team is created"
-        def response = postNewTeam(SampleNewTeamDto.sampleNewTeamDto())
+    def "Should not create team with empty name"(){
+        when:
+        def response = postNewTeam(sampleNewTeamDto(name: name))
 
-        then: "system create new team"
-        response.statusCode == HttpStatus.CREATED
+        then:
+        response.statusCode == HttpStatus.UNPROCESSABLE_ENTITY
 
-        when: "get all created teams"
-        response = getTeams()
+        where:
+        name << ['', ' ']
+    }
 
-        then: "verify that one team was created"
-        response.statusCode == HttpStatus.OK
-        response.body.size() == 1
+    def "Should not create team already existing"(){
+        given:
+        postNewTeam(sampleNewTeamDto())
 
-        and: "has default values"
-        with(response.body[0]){
-            name == SampleNewTeamDto.sampleNewTeamDto().name
-            currentlyImplementedProjects == 0
-            true
-            members == []
-        }
+        when:
+        def result = postNewTeam(sampleNewTeamDto())
+
+        then:
+        result.statusCode == HttpStatus.UNPROCESSABLE_ENTITY
+        result.body.message == "TEAM_ALREADY_EXISTS"
 
     }
+
 
 }
