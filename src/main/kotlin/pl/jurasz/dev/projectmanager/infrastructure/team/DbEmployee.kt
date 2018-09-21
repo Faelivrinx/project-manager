@@ -1,7 +1,7 @@
 package pl.jurasz.dev.projectmanager.infrastructure.team
 
-import pl.jurasz.dev.projectmanager.domain.team.Employee
-import pl.jurasz.dev.projectmanager.domain.team.JobPosition
+import pl.jurasz.dev.projectmanager.domain.values.Employee
+import pl.jurasz.dev.projectmanager.domain.values.JobPosition
 
 data class DbEmployee (
         val firstName: String,

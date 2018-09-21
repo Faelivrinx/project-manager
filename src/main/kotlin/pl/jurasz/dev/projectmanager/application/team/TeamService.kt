@@ -8,7 +8,7 @@ import pl.jurasz.dev.projectmanager.application.team.dto.TeamMemberDto
 import pl.jurasz.dev.projectmanager.domain.expection.EntityAlreadyExistException
 import pl.jurasz.dev.projectmanager.domain.expection.ErrorCode
 import pl.jurasz.dev.projectmanager.domain.expection.MissingEntityException
-import pl.jurasz.dev.projectmanager.domain.team.Employee
+import pl.jurasz.dev.projectmanager.domain.values.Employee
 import pl.jurasz.dev.projectmanager.domain.team.Team
 import pl.jurasz.dev.projectmanager.domain.team.TeamRepository
 import java.lang.invoke.MethodHandles

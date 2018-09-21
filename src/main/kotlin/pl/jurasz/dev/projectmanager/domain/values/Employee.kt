@@ -1,6 +1,5 @@
-package pl.jurasz.dev.projectmanager.domain.team
+package pl.jurasz.dev.projectmanager.domain.values
 
-import org.apache.commons.lang3.StringUtils
 import org.apache.commons.lang3.StringUtils.isBlank
 import pl.jurasz.dev.projectmanager.application.team.dto.TeamMemberDto
 
@@ -21,7 +20,7 @@ data class Employee(
                 toJobPosition(teamMember.jobPosition)
         )
 
-        fun toJobPosition(jobString: String): JobPosition{
+        fun toJobPosition(jobString: String): JobPosition {
             return try {
                 JobPosition.valueOf(jobString)
             } catch (e: IllegalArgumentException){
@@ -33,11 +32,3 @@ data class Employee(
 
 
 
-enum class JobPosition{
-    DEVELOPER,
-    SCRUM_MASTER,
-    PRODUCT_OWNER,
-    INVALID;
-
-    fun isInvalid() : Boolean = this == INVALID
-}

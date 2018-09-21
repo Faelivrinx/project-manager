@@ -1,6 +1,6 @@
 package pl.jurasz.dev.projectmanager.application.team.dto
 
-import pl.jurasz.dev.projectmanager.domain.team.Employee
+import pl.jurasz.dev.projectmanager.domain.values.Employee
 
 data class TeamMemberDto (
         val firstName: String,

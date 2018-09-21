@@ -1,10 +1,10 @@
 package pl.jurasz.dev.projectmanager.domain.team
 
 import org.apache.commons.lang3.StringUtils.isBlank
-import pl.jurasz.dev.projectmanager.application.team.dto.TeamMemberDto
 import pl.jurasz.dev.projectmanager.domain.expection.ErrorCode
 import pl.jurasz.dev.projectmanager.domain.expection.ErrorCode.*
 import pl.jurasz.dev.projectmanager.domain.expection.InvalidEntityException
+import pl.jurasz.dev.projectmanager.domain.values.Employee
 
 data class Team ( val name: String,
                   val currentlyImplementedProjects: Int = 0,
